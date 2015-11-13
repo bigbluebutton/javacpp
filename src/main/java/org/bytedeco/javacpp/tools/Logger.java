@@ -40,7 +40,7 @@ public class Logger {
     }
 
     /** Returns false. */
-    public boolean isDebugEnabled() { return false; }
+    public boolean isDebugEnabled() { return true; }
     /** Returns true. */
     public boolean isInfoEnabled()  { return true; }
     /** Returns true. */
@@ -49,11 +49,11 @@ public class Logger {
     public boolean isErrorEnabled() { return true; }
 
     /** Calls {@code System.out.println(s)}. */
-    public void debug(String s) { System.out.println(s); }
+    public void debug(String s) { System.out.println(Thread.currentThread().getName() + " -" + s); }
     /** Calls {@code System.out.println(s)}. */
-    public void info(String s)  { System.out.println(s); }
+    public void info(String s)  { System.out.println(Thread.currentThread().getName() + " -" + s); }
     /** Calls {@code System.err.println("Warning: " + s)}. */
-    public void warn(String s)  { System.err.println("Warning: " + s); }
+    public void warn(String s)  { System.err.println(Thread.currentThread().getName() + " -" + "Warning: " + s); }
     /** Calls {@code System.err.println("Error: " + s)}. */
-    public void error(String s) { System.err.println("Error: " + s); }
+    public void error(String s) { System.err.println(Thread.currentThread().getName() + " -" + "Error: " + s); }
 }
