@@ -502,7 +502,13 @@ public class Loader {
                 //if (logger.isDebugEnabled()) {
                 //    logger.debug("Loading class " + cls + " from preload lib " + preload);
                 //}
-                URL[] urls = findLibrary(cls, p, preload, pathsFirst);
+                // Do not attempt to search for the native libraries.
+                // Let the System load them. Searching for the libraries results
+                // in querying the server if the DLL is up-to-date or not.
+                // Doing this makes the initialization of the app take longer.
+                // (ralam - jun 15, 2016)
+                //URL[] urls = findLibrary(cls, p, preload, pathsFirst);
+                URL[] urls = new URL[0];
                 loadLibrary(urls, preload);
             } catch (UnsatisfiedLinkError e) {
                 preloadError = e;
@@ -514,7 +520,13 @@ public class Loader {
             //if (logger.isDebugEnabled()) {
             //    logger.debug("==================== Loading class " + cls + " from platform.library " + library + " ======\n");
             //}
-            URL[] urls = findLibrary(cls, p, library, pathsFirst);
+            // Do not attempt to search for the native libraries.
+            // Let the System load them. Searching for the libraries results
+            // in querying the server if the DLL is up-to-date or not.
+            // Doing this makes the initialization of the app take longer.
+            // (ralam - jun 15, 2016)
+            //URL[] urls = findLibrary(cls, p, library, pathsFirst);
+            URL[] urls = new URL[0];
             return loadLibrary(urls, library);
         } catch (UnsatisfiedLinkError e) {
             if (preloadError != null && e.getCause() == null) {
